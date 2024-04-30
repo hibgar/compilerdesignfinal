@@ -18,12 +18,27 @@ int main() {
 
     std::string line;
     while (std::getline(inputFile, line)) {
-        while (line.find(" ") == 0){
-            
+        while (!line.empty() && line[0] == ' ') {
+            line.erase(0, 1);
         }
+        // Check for empty line
+        if (line.empty()) {
+            continue;
+        }
+
         if (line.find("//") != std::string::npos && line.find("//") == 0) {
             continue;
         }
+        
+        int index = 1;
+        while (index < line.length() && line[index] != '\n') {
+            if (isspace(line[index-1]) && isspace(line[index])) {
+                line.erase(index-1, 1);
+            } else {
+                index++;
+            }
+        }
+
         outputFile << line << std::endl;
     }
 
