@@ -21,7 +21,7 @@ int main() {
         while (!line.empty() && line[0] == ' ') {
             line.erase(0, 1);
         }
-        // Check for empty line
+
         if (line.empty()) {
             continue;
         }
