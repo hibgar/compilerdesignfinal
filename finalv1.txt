@@ -9,7 +9,7 @@ begin
          q2s =         4 ;
        r     = 5    ;
        p1 =   2 * p1 + r * ( q2s + pp ) ;
-     write ( p1 ); // display p1 //
+     write ( p1 ) ; // display p1 //
 
         //compute the value of this expression //
          pp = p1 * ( q2s + 2 * rc) ;
