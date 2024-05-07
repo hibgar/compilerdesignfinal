@@ -164,9 +164,36 @@ int main() {
                     } else if (val == "I") {
                         arrayValue = twodarray[1][indexMap[std::string(1,currentRead[0])]];    
                     } else if (val == "L") {
+                        int index = 0;
+                        while (val != std::string(1,currentRead[index]) and index < currentRead.size()) {
 
-                        
-                        for (int i = 0; i < currentRead.size(); i++) {
+                            if (val == "PI") {
+                                compiler.pop();
+                                arrayValue = twodarray[2][indexMap[std::string(1,currentRead[index])]];
+                            } else {
+                                if (isdigit(currentRead[index])) {
+                                    arrayValue = twodarray[21][indexMap[std::string(1,currentRead[index])]];
+                                }
+                                if (isalpha(currentRead[index])){
+                                    arrayValue = twodarray[22][indexMap[std::string(1,currentRead[index])]];
+                                }
+                            }
+
+                            for (int i = key[arrayValue-1].size() - 1; i >= 0; i--) {
+                                compiler.push(key[arrayValue-1][i]);
+                            }
+                            
+                            compiler.pop(); 
+                            
+                            val = compiler.top(); // == PI
+
+                            index++;
+                        }
+
+                        /* arrayValue = twodarray[22][indexMap[std::string(1,currentRead[0])]];
+                        compiler.push(key[arrayValue-1][0]);
+
+                        for (int i = 1; i < currentRead.size(); i++) {
                             val = compiler.top(); // = PI
                             compiler.pop();
                             compiler.push(key[2][1]);
@@ -184,11 +211,11 @@ int main() {
                             for (int i = key[arrayValue-1].size() - 1; i >= 0; i--) {
                                 compiler.push(key[arrayValue-1][i]);
                             }
-                            
+
                             compiler.pop();
                             val = compiler.top();
                             compiler.pop();
-                        }
+                        } */
                         
                     }
                     
