@@ -8,7 +8,6 @@
 #include <unordered_map>
 using namespace std;
 
-
 void displayStack(stack<string> stack) {
     vector<string> tempVector;
 
@@ -21,7 +20,7 @@ void displayStack(stack<string> stack) {
     // Display elements from tempVector
     std::cout << endl;
     for (auto it = tempVector.rbegin(); it != tempVector.rend(); ++it) {
-        std::cout << *it;
+        std::cout << *it << " ";
     }
 
     // Restore elements to the original stack
@@ -135,7 +134,7 @@ int main() {
 
     stack<string> compiler;
     compiler.push("$");
-    compiler.push("E");
+    compiler.push("P");
     
     
     string currentRead;
@@ -143,32 +142,55 @@ int main() {
 
     while (!compiler.empty()) {
         
-        //pop
         string val = compiler.top();
         compiler.pop();
+        int arrayValue;
 
         //read token
         std::string line;
         while (std::getline(inputFile, line)) {
-            // Tokenize each line
             std::vector<std::string> tokens = tokenize(line);
             // for each token
             for (const auto& token : tokens) {
                 std::cout << token << std::endl;
                 currentRead = token;
-
-
+                
                 //while no match
                 while (val != currentRead) {
                     
                     // go to [_,_] -- determine array value based on val
-                    
-                    int arrayValue;
                     if (val == "P") {
                         arrayValue = twodarray[0][indexMap[currentRead]];
                     } else if (val == "I") {
-                        arrayValue = twodarray[1][indexMap[currentRead]];
-                    } 
+                        arrayValue = twodarray[1][indexMap[std::string(1,currentRead[0])]];    
+                    } else if (val == "L") {
+
+                        
+                        for (int i = 0; i < currentRead.size(); i++) {
+                            val = compiler.top(); // = PI
+                            compiler.pop();
+                            compiler.push(key[2][1]);
+                            compiler.push(key[2][0]);
+                            // iterate the indiv chars here
+                            compiler.pop();
+                            if (isalpha(currentRead[i])) {
+                                arrayValue = twodarray[22][indexMap[std::string(1,currentRead[i])]];
+                            }
+
+                            if (isdigit(currentRead[i])) {
+                                arrayValue = twodarray[21][indexMap[std::string(1,currentRead[i])]];
+                            }
+                            
+                            for (int i = key[arrayValue-1].size() - 1; i >= 0; i--) {
+                                compiler.push(key[arrayValue-1][i]);
+                            }
+                            
+                            compiler.pop();
+                            val = compiler.top();
+                            compiler.pop();
+                        }
+                        
+                    }
                     
 
                     if (arrayValue == 0) {
@@ -177,7 +199,7 @@ int main() {
                     }
 
                     // push elements from key[arrayValue] into compiler
-                    for (size_t i = 0; i < (sizeof(key[arrayValue-1]) / sizeof(key[arrayValue-1][0])); ++i) {
+                    for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                         compiler.push(key[arrayValue-1][i]);
                     }
                     displayStack(compiler);
@@ -193,12 +215,11 @@ int main() {
 
                 displayStack(compiler);
 
-                
+                val = compiler.top();
+                compiler.pop();
 
             }
         }
-        
-        
     }
 
     std::cout << endl << "accepted" << endl;
