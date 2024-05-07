@@ -3,6 +3,9 @@
 #include <string>
 
 int main() {
+
+    // PART 1
+
     std::ifstream inputFile("finalv1.txt");
     if (!inputFile.is_open()) {
         std::cerr << "Error: Unable to open input file." << std::endl;
@@ -42,9 +45,13 @@ int main() {
         outputFile << line << std::endl;
     }
 
+
     inputFile.close();
     outputFile.close();
 
     std::cout << "Comment lines removed successfully." << std::endl;
+
+
+
     return 0;
 }
