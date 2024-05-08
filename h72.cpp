@@ -161,8 +161,21 @@ int main() {
                     // go to [_,_] -- determine array value based on val
                     if (val == "P") {
                         arrayValue = twodarray[0][indexMap[currentRead]];
+
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
+
                     } else if (val == "I") {
                         arrayValue = twodarray[1][indexMap[std::string(1,currentRead[0])]];    
+
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
+
+
                     } else if (val == "L") {
 
                         int index = 0;
@@ -203,10 +216,26 @@ int main() {
 
                             index++;
                         }
-                        
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
                     } else if (val == "PI") {
                         arrayValue = twodarray[2][indexMap[currentRead]];
-                    }
+
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
+
+                    } else if (val == "DL") {
+                        arrayValue = twodarray[3][indexMap[std::string(1,currentRead[0])]];
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
+
+                    } 
                     
 
                     if (arrayValue == 0) {
@@ -214,10 +243,10 @@ int main() {
                         return 0;
                     }
 
-                    // push elements from key[arrayValue] into compiler
+                    /* // push elements from key[arrayValue] into compiler
                     for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                         compiler.push(key[arrayValue-1][i]);
-                    }
+                    } */
                     
                     
                     while ( compiler.top() == "0" or compiler.top() == "l") {
