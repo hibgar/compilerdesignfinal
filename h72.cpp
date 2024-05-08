@@ -48,7 +48,7 @@ int main() {
         return 1;
     }
 
-    std::vector<std::string> keys = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "p", "q", "r", "s", "+", "-", "*", "/", "=", "l", "program", "var", ";", ":", "(", ")", "$", "begin", "end", "integer", "write", "\"value=\""};
+    std::vector<std::string> keys = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "p", "q", "r", "s", "+", "-", "*", "/", "=", "l", "program", "var", ",", ";", ":", "(", ")", "$", "begin", "end", "integer", "write", "\"value=\""};
     std::unordered_map<std::string, int> indexMap;
 
     // Populate the map
@@ -235,6 +235,12 @@ int main() {
                             compiler.push(key[arrayValue-1][i]);
                         }
 
+                    } else if (val == "D") {
+                        arrayValue = twodarray[4][indexMap[std::string(1,currentRead[0])]];
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
                     } 
                     
 
@@ -256,8 +262,6 @@ int main() {
                     compiler.pop();
 
                 }
-
-                displayStack(compiler);
 
                 val = compiler.top();
                 compiler.pop();
