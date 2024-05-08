@@ -1,6 +1,6 @@
 program s2024 ;
 var
-p1 , q2s , r, pp : integer ;
+p1 , q2s , r , pp : integer ;
 begin
 p1 = 3 ;
 pp= 23 ;

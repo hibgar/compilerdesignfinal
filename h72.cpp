@@ -61,17 +61,17 @@ int main() {
        //0,1,2,3,4,5,6,7,8,9,p,q,r,s,+,-,*,/,=,l,program,var , ; : ( ) $ begin end. integer write "value=",
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0}, //P
         {0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //I
-        {3,3,3,3,3,3,3,3,3,3,2,2,2,2,4,4,4,4,0,0,0,0,4,4,4,0,4,0,0,0,0,0,0}, //PI
+        {3,3,3,3,3,3,3,3,3,3,2,2,2,2,4,4,4,4,4,0,0,0,4,4,4,0,4,0,0,0,0,0,0}, //PI
         {0,0,0,0,0,0,0,0,0,0,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //DL
         {0,0,0,0,0,0,0,0,0,0,7,7,7,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //D
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,4,0,0,0,0,0,0,0,0}, //PD
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0}, //T
         {0,0,0,0,0,0,0,0,0,0,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0}, //SL
         {0,0,0,0,0,0,0,0,0,0,10,10,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,10,0}, //PS
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,11,11,0,0,0,0,0,0,0,0,0,0,0,0,12,0}, //S
+        {0,0,0,0,0,0,0,0,0,0,11,11,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12,0}, //S
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0}, //W
         {0,0,0,0,0,0,0,0,0,0,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14}, //R
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15,15,15,15,0,0,0,0,0,0,0,0,0,0,0,0}, //A
+        {0,0,0,0,0,0,0,0,0,0,15,15,15,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //A
         {16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,0,0,0,0,0,0,0,0,0,16,0,0,0,0,0,0,0}, //E
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,17,18,0,0,0,0,0,0,0,4,0,0,4,0,0,0,0,0,0}, //PE
         {19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,0,0,0,0,0,0,0,0,0,19,0,0,0,0,0,0,0}, //M
@@ -153,6 +153,10 @@ int main() {
             // for each token
             for (const auto& token : tokens) {
                 
+                if (token == "//") {
+                    break;
+                }
+
                 currentRead = token;
                 
                 //while no match
@@ -241,7 +245,64 @@ int main() {
                         for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                             compiler.push(key[arrayValue-1][i]);
                         }
-                    } 
+                    } else if (val == "PD") {
+                        arrayValue = twodarray[5][indexMap[std::string(1,currentRead[0])]];
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
+                    } else if (val == "T") {
+                        arrayValue = twodarray[6][indexMap[currentRead]];
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
+                    } else if (val == "SL") {
+                        if (currentRead == "write") {
+                            arrayValue = twodarray[7][indexMap[currentRead]];
+                        } else {
+                            arrayValue = twodarray[7][indexMap[std::string(1,currentRead[0])]];
+                        }
+                        
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
+                    } else if (val == "PS") {
+                        if (currentRead == "write") {
+                            arrayValue = twodarray[8][indexMap[currentRead]];
+                        } else {
+                            arrayValue = twodarray[8][indexMap[std::string(1,currentRead[0])]];
+                        }
+                        
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
+                    } else if (val == "S") {
+                        if (currentRead == "write") {
+                            arrayValue = twodarray[9][indexMap[currentRead]];
+                        } else {
+                            arrayValue = twodarray[9][indexMap[std::string(1,currentRead[0])]];
+                        }
+                        
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
+                    } else if (val == "A") {
+                        arrayValue = twodarray[12][indexMap[std::string(1,currentRead[0])]];
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
+                    } else if (val == "E") {
+                        arrayValue = twodarray[13][indexMap[std::string(1,currentRead[0])]];
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
+                    }
                     
 
                     if (arrayValue == 0) {
