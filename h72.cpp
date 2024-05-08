@@ -164,9 +164,12 @@ int main() {
                     } else if (val == "I") {
                         arrayValue = twodarray[1][indexMap[std::string(1,currentRead[0])]];    
                     } else if (val == "L") {
-                        int index = 0;
-                        while (val != std::string(1,currentRead[index]) and index < currentRead.size()) {
 
+                        int index = 0;
+                       
+
+                        while (val != currentRead and index < token.size() ) {
+                            currentRead = std::string(1,token[index]);
                             if (val == "PI") {
                                 compiler.pop();
                                 arrayValue = twodarray[2][indexMap[std::string(1,currentRead[index])]];
@@ -185,37 +188,21 @@ int main() {
                             
                             compiler.pop(); 
                             
+                            if (isdigit(token[index])) {
+                                arrayValue = twodarray[21][indexMap[std::string(1,token[index])]];
+                            }
+                            if (isalpha(token[index])){
+                                arrayValue = twodarray[22][indexMap[std::string(1,token[index])]];
+                            }
+
+                            compiler.push(key[arrayValue-1][0]);
+
+                            compiler.pop();
+
                             val = compiler.top(); // == PI
 
                             index++;
                         }
-
-                        /* arrayValue = twodarray[22][indexMap[std::string(1,currentRead[0])]];
-                        compiler.push(key[arrayValue-1][0]);
-
-                        for (int i = 1; i < currentRead.size(); i++) {
-                            val = compiler.top(); // = PI
-                            compiler.pop();
-                            compiler.push(key[2][1]);
-                            compiler.push(key[2][0]);
-                            // iterate the indiv chars here
-                            compiler.pop();
-                            if (isalpha(currentRead[i])) {
-                                arrayValue = twodarray[22][indexMap[std::string(1,currentRead[i])]];
-                            }
-
-                            if (isdigit(currentRead[i])) {
-                                arrayValue = twodarray[21][indexMap[std::string(1,currentRead[i])]];
-                            }
-                            
-                            for (int i = key[arrayValue-1].size() - 1; i >= 0; i--) {
-                                compiler.push(key[arrayValue-1][i]);
-                            }
-
-                            compiler.pop();
-                            val = compiler.top();
-                            compiler.pop();
-                        } */
                         
                     }
                     
