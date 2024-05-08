@@ -76,8 +76,8 @@ int main() {
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,17,18,0,0,0,0,0,0,0,4,0,0,4,0,0,0,0,0,0}, //PE
         {19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,0,0,0,0,0,0,0,0,0,19,0,0,0,0,0,0,0}, //M
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,20,21,0,0,0,0,0,4,0,0,4,0,0,0,0,0,0}, //PM
-        {22,22,22,22,22,22,22,22,22,22,22,22,22,22,23,23,0,0,0,0,0,0,0,0,0,24,0,0,0,0,0,0,0}, //F
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,25,25,0,0,0,25,0,0,0,0,0,0,0,0,0,0,0,0,0}, // N
+        {23,23,23,23,23,23,23,23,23,23,22,22,22,22,23,23,0,0,0,0,0,0,0,0,0,24,0,0,0,0,0,0,0}, //F
+        {25,25,25,25,25,25,25,25,25,25,0,0,0,0,25,25,0,0,0,25,0,0,0,0,0,0,0,0,0,0,0,0,0}, // N
         {26,26,26,26,26,26,26,26,26,26,0,0,0,0,4,4,4,4,0,0,0,0,0,4,0,0,4,0,0,0,0,0,0}, //PN
         {4,4,4,4,4,4,4,4,4,4,0,0,0,0,27,28,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //G
         {29,30,31,32,33,34,35,36,37,38,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //X
@@ -112,7 +112,7 @@ int main() {
         {"I"}, //22
         {"N"}, //23
         {"(","E",")"}, //24
-        {"S", "X", "PN"}, //25
+        {"G", "X", "PN"}, //25
         {"X", "PN"}, //26
         {"+"}, //27
         {"-"}, //28
@@ -302,11 +302,62 @@ int main() {
                         for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                             compiler.push(key[arrayValue-1][i]);
                         }
+                    } else if (val == "PE") {
+                        arrayValue = twodarray[14][indexMap[std::string(1,currentRead[0])]];
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
+                    } else if (val == "M") {
+                        arrayValue = twodarray[15][indexMap[std::string(1,currentRead[0])]];
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
+                    } else if (val == "PM") {
+                        arrayValue = twodarray[16][indexMap[std::string(1,currentRead[0])]];
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
+                    } else if (val == "F") {
+                        arrayValue = twodarray[17][indexMap[std::string(1,currentRead[0])]];
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
+                    } else if (val == "N") {
+                        arrayValue = twodarray[18][indexMap[std::string(1,currentRead[0])]];
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
+                    } else if (val == "PN") {
+                        arrayValue = twodarray[19][indexMap[std::string(1,currentRead[0])]];
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
+                    } else if (val == "G") {
+                        arrayValue = twodarray[20][indexMap[std::string(1,currentRead[0])]];
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
+                    } else if (val == "X") {
+                        arrayValue = twodarray[21][indexMap[std::string(1,currentRead[0])]];
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
                     }
                     
 
                     if (arrayValue == 0) {
                         std::cout << endl << "rejected" << endl;
+                        if (val == "P") {
+                            cout << "program is expected" << endl;
+                        } 
                         return 0;
                     }
 
