@@ -152,7 +152,7 @@ int main() {
             std::vector<std::string> tokens = tokenize(line);
             // for each token
             for (const auto& token : tokens) {
-                std::cout << token << std::endl;
+                
                 currentRead = token;
                 
                 //while no match
@@ -204,6 +204,8 @@ int main() {
                             index++;
                         }
                         
+                    } else if (val == "PI") {
+                        arrayValue = twodarray[2][indexMap[currentRead]];
                     }
                     
 
@@ -216,7 +218,6 @@ int main() {
                     for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                         compiler.push(key[arrayValue-1][i]);
                     }
-                    displayStack(compiler);
                     
                     
                     while ( compiler.top() == "0" or compiler.top() == "l") {
