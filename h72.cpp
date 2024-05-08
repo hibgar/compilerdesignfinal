@@ -80,7 +80,7 @@ int main() {
         {25,25,25,25,25,25,25,25,25,25,0,0,0,0,25,25,0,0,0,25,0,0,0,0,0,0,0,0,0,0,0,0,0}, // N
         {26,26,26,26,26,26,26,26,26,26,0,0,0,0,4,4,4,4,0,0,0,0,0,4,0,0,4,0,0,0,0,0,0}, //PN
         {4,4,4,4,4,4,4,4,4,4,0,0,0,0,27,28,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //G
-        {29,30,31,32,33,34,35,36,37,38,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //X
+        {29,30,31,32,33,34,35,36,37,38,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0}, //X
         {0,0,0,0,0,0,0,0,0,0,39,40,41,42,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0} //L
     };
 
@@ -350,7 +350,45 @@ int main() {
                         for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                             compiler.push(key[arrayValue-1][i]);
                         }
-                    }
+
+                        if (currentRead.size() > 1) {
+
+                            compiler.pop();
+                            int index = 1;
+                        
+
+                            while (val != currentRead and index < token.size() ) {
+
+                                val = compiler.top();
+                                compiler.pop();
+
+                                currentRead = std::string(1,token[index]);
+                                if (val == "PI") {
+                                    compiler.pop();
+                                    arrayValue = twodarray[2][indexMap[currentRead]];
+                                } else {
+
+                                    if (isdigit(currentRead[0])) {
+                                        
+                                            arrayValue = twodarray[21][indexMap[currentRead]];
+                                    }
+                                }
+
+                                for (int i = key[arrayValue-1].size() - 1; i >= 0; i--) {
+                                    compiler.push(key[arrayValue-1][i]);
+                                }
+                                
+                                // compiler.pop();
+
+                                val = compiler.top(); 
+
+                                index++;
+                            }
+
+                        }
+
+
+                    } 
                     
 
                     if (arrayValue == 0) {
@@ -361,12 +399,7 @@ int main() {
                         return 0;
                     }
 
-                    /* // push elements from key[arrayValue] into compiler
-                    for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
-                        compiler.push(key[arrayValue-1][i]);
-                    } */
-                    
-                    
+
                     while ( compiler.top() == "0" or compiler.top() == "l") {
                         compiler.pop();
                     }
