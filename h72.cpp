@@ -152,7 +152,13 @@ int main() {
             std::vector<std::string> tokens = tokenize(line);
             // for each token
             for (const auto& token : tokens) {
-                
+
+                // Displays stack information
+                std::cout << "Token: " << currentRead << std::endl;
+                std::cout << "Stack: ";
+                displayStack(compiler);
+                std::cout << std::endl;
+          
                 if (token == "//") {
                     break;
                 }
@@ -166,7 +172,6 @@ int main() {
                     if (val == "P") {
                         arrayValue = twodarray[0][indexMap[currentRead]];
 
-                        // push elements from key[arrayValue] into compiler
                         for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                             compiler.push(key[arrayValue-1][i]);
                         }
@@ -174,16 +179,13 @@ int main() {
                     } else if (val == "I") {
                         arrayValue = twodarray[1][indexMap[std::string(1,currentRead[0])]];    
 
-                        // push elements from key[arrayValue] into compiler
                         for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                             compiler.push(key[arrayValue-1][i]);
                         }
 
-
                     } else if (val == "L") {
 
                         int index = 0;
-                       
 
                         while (val != currentRead and index < token.size() ) {
                             currentRead = std::string(1,token[index]);
@@ -216,18 +218,17 @@ int main() {
 
                             compiler.pop();
 
-                            val = compiler.top(); // == PI
+                            val = compiler.top(); 
 
                             index++;
                         }
-                        // push elements from key[arrayValue] into compiler
+                        
                         for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                             compiler.push(key[arrayValue-1][i]);
                         }
                     } else if (val == "PI") {
                         arrayValue = twodarray[2][indexMap[currentRead]];
 
-                        // push elements from key[arrayValue] into compiler
                         for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                             compiler.push(key[arrayValue-1][i]);
                         }
@@ -242,7 +243,7 @@ int main() {
                     } else if (val == "D") {
                         arrayValue = twodarray[4][indexMap[std::string(1,currentRead[0])]];
                         // push elements from key[arrayValue] into compiler
-                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {                            
                             compiler.push(key[arrayValue-1][i]);
                         }
                     } else if (val == "PD") {
@@ -285,91 +286,82 @@ int main() {
                         } else {
                             arrayValue = twodarray[9][indexMap[std::string(1,currentRead[0])]];
                         }
-                        
-                        // push elements from key[arrayValue] into compiler
                         for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                             compiler.push(key[arrayValue-1][i]);
                         }
                     } else if (val == "A") {
                         arrayValue = twodarray[12][indexMap[std::string(1,currentRead[0])]];
-                        // push elements from key[arrayValue] into compiler
+                        
                         for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                             compiler.push(key[arrayValue-1][i]);
                         }
                     } else if (val == "E") {
                         arrayValue = twodarray[13][indexMap[std::string(1,currentRead[0])]];
-                        // push elements from key[arrayValue] into compiler
                         for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                             compiler.push(key[arrayValue-1][i]);
                         }
                     } else if (val == "PE") {
                         arrayValue = twodarray[14][indexMap[std::string(1,currentRead[0])]];
-                        // push elements from key[arrayValue] into compiler
+                        
                         for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                             compiler.push(key[arrayValue-1][i]);
                         }
                     } else if (val == "M") {
                         arrayValue = twodarray[15][indexMap[std::string(1,currentRead[0])]];
-                        // push elements from key[arrayValue] into compiler
+                        
                         for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                             compiler.push(key[arrayValue-1][i]);
                         }
                     } else if (val == "PM") {
                         arrayValue = twodarray[16][indexMap[std::string(1,currentRead[0])]];
-                        // push elements from key[arrayValue] into compiler
+                        
                         for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                             compiler.push(key[arrayValue-1][i]);
                         }
                     } else if (val == "F") {
                         arrayValue = twodarray[17][indexMap[std::string(1,currentRead[0])]];
-                        // push elements from key[arrayValue] into compiler
+                        
                         for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                             compiler.push(key[arrayValue-1][i]);
                         }
                     } else if (val == "N") {
                         arrayValue = twodarray[18][indexMap[std::string(1,currentRead[0])]];
-                        // push elements from key[arrayValue] into compiler
+                        
                         for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                             compiler.push(key[arrayValue-1][i]);
                         }
                     } else if (val == "PN") {
                         arrayValue = twodarray[19][indexMap[std::string(1,currentRead[0])]];
-                        // push elements from key[arrayValue] into compiler
+                        
                         for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                             compiler.push(key[arrayValue-1][i]);
                         }
                     } else if (val == "G") {
                         arrayValue = twodarray[20][indexMap[std::string(1,currentRead[0])]];
-                        // push elements from key[arrayValue] into compiler
+                        
                         for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                             compiler.push(key[arrayValue-1][i]);
                         }
                     } else if (val == "X") {
                         arrayValue = twodarray[21][indexMap[std::string(1,currentRead[0])]];
-                        // push elements from key[arrayValue] into compiler
+                        
                         for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                             compiler.push(key[arrayValue-1][i]);
                         }
 
                         if (currentRead.size() > 1) {
-
                             compiler.pop();
-                            int index = 1;
-                        
-
+                            int index = 1;                        
                             while (val != currentRead and index < token.size() ) {
 
                                 val = compiler.top();
                                 compiler.pop();
-
                                 currentRead = std::string(1,token[index]);
                                 if (val == "PI") {
                                     compiler.pop();
                                     arrayValue = twodarray[2][indexMap[currentRead]];
                                 } else {
-
                                     if (isdigit(currentRead[0])) {
-                                        
                                             arrayValue = twodarray[21][indexMap[currentRead]];
                                     }
                                 }
@@ -377,20 +369,14 @@ int main() {
                                 for (int i = key[arrayValue-1].size() - 1; i >= 0; i--) {
                                     compiler.push(key[arrayValue-1][i]);
                                 }
-                                
-                                // compiler.pop();
 
                                 val = compiler.top(); 
-
                                 index++;
                             }
-
                         }
-
-
                     } else if (val == "W") {
                         arrayValue = twodarray[10][indexMap[currentRead]];
-                        // push elements from key[arrayValue] into compiler
+                        
                         for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                             compiler.push(key[arrayValue-1][i]);
                         }
@@ -405,17 +391,51 @@ int main() {
                         for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
                             compiler.push(key[arrayValue-1][i]);
                         }
+                    } else {
+                        arrayValue = 0;
                     }
                     
 
                     if (arrayValue == 0) {
                         std::cout << endl << "rejected" << endl;
-                        if (val == "P") {
-                            cout << "program is expected" << endl;
+
+                        // Check for specific error conditions
+                        if (val == "P" && currentRead != "program") {
+                            std::cerr << "Error: 'program' keyword is expected." << std::endl;
+                            return 1;
+                        } else if (val == "DL" && currentRead != "var") {
+                            std::cerr << "Error: 'var' keyword is expected." << std::endl;
+                            return 1;
+                        } else if (val == "SL" && currentRead != "begin") {
+                            std::cerr << "Error: 'begin' keyword is expected." << std::endl;
+                            return 1;
+                        } else if (val == "PS" && currentRead != "end.") {
+                            std::cerr << "Error: 'end.' keyword is expected." << std::endl;
+                            return 1;
+                        } else if (val == "T" && currentRead != "integer") {
+                            std::cerr << "Error: 'integer' keyword is expected." << std::endl;
+                            return 1;
+                        } else if (val == "S" && currentRead != "write") {
+                            std::cerr << "Error: 'write' keyword is expected." << std::endl;
+                            return 1;
+                        } else if (val == "unknown identifier") {
+                            std::cerr << "Error: Unknown identifier '" << currentRead << "'." << std::endl;
+                            return 1;
+                        } else if (val == "," && currentRead != ",") {
+                            std::cerr << "Error: ',' is missing." << std::endl;
+                            return 1;
+                        } else if (val == "(" && currentRead != "(") {
+                            std::cerr << "Error: Left parentheses '(' is missing." << std::endl;
+                            return 1;
+                        } else if (val == ")" && currentRead != ")") {
+                            std::cerr << "Error: Right parentheses ')' is missing." << std::endl;
+                            return 1;
+                        } else if (val == ";" && currentRead != ";") {
+                            std::cerr << "Error: ';' is missing." << std::endl;
+                            return 1;
                         } 
                         return 0;
                     }
-
 
                     while ( compiler.top() == "0" or compiler.top() == "l") {
                         compiler.pop();
@@ -433,8 +453,7 @@ int main() {
             std::cout << line << endl;
         }
     }
-
-    std::cout << endl << "accepted" << endl;
+    std::cout << endl << "No error" << endl;
 
   return 0;
 }
