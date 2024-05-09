@@ -48,7 +48,7 @@ int main() {
         return 1;
     }
 
-    std::vector<std::string> keys = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "p", "q", "r", "s", "+", "-", "*", "/", "=", "l", "program", "var", ",", ";", ":", "(", ")", "$", "begin", "end", "integer", "write", "\"value=\""};
+    std::vector<std::string> keys = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "p", "q", "r", "s", "+", "-", "*", "/", "=", "l", "program", "var", ",", ";", ":", "(", ")", "$", "begin", "end.", "integer", "write", "“value=”,"};
     std::unordered_map<std::string, int> indexMap;
 
     // Populate the map
@@ -101,7 +101,7 @@ int main() {
         {"A", "S"}, //11
         {"W"}, //12
         {"write", "(", "R", "I", ")", ";"}, //13
-        {"\"value=\","}, //14
+        {"“value=”,"}, //14
         {"I", "=", "E", ";"}, //15
         {"M", "PE"}, //16
         {"+", "M", "PE"}, //17
@@ -269,7 +269,7 @@ int main() {
                             compiler.push(key[arrayValue-1][i]);
                         }
                     } else if (val == "PS") {
-                        if (currentRead == "write") {
+                        if (currentRead == "write" || currentRead == "end.") {
                             arrayValue = twodarray[8][indexMap[currentRead]];
                         } else {
                             arrayValue = twodarray[8][indexMap[std::string(1,currentRead[0])]];
@@ -388,7 +388,24 @@ int main() {
                         }
 
 
-                    } 
+                    } else if (val == "W") {
+                        arrayValue = twodarray[10][indexMap[currentRead]];
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
+                    } else if (val == "R") {
+                        if (currentRead == "“value=”,") {
+                            arrayValue = twodarray[11][indexMap[currentRead]];
+                        } else{
+                            arrayValue = twodarray[11][indexMap[std::string(1,currentRead[0])]];
+                        }
+                        
+                        // push elements from key[arrayValue] into compiler
+                        for (int i = key[arrayValue-1].size() - 1; i >= 0; --i) {
+                            compiler.push(key[arrayValue-1][i]);
+                        }
+                    }
                     
 
                     if (arrayValue == 0) {
@@ -412,6 +429,8 @@ int main() {
                 compiler.pop();
 
             }
+
+            std::cout << line << endl;
         }
     }
 

@@ -12,7 +12,7 @@ begin
      write ( p1 ) ; // display p1 //
 
         //compute the value of this expression //
-         pp = p1 * ( q2s + 2 * rc ) ;
-         write ( “value=”,      pp  ) ; //print the value of pp //
+         pp = p1 * ( q2s + 2 * r ) ;
+         write ( “value=”,      pp  ) ; // print the value of pp //
 
 end.
